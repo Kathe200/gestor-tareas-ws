@@ -1,61 +1,52 @@
 package com.bdb.gestortareasws.web.controller;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
+import com.bdb.gestortareasws.domain.dto.RespuestaDTO;
+import com.bdb.gestortareasws.domain.dto.TareaDTO;
+import com.bdb.gestortareasws.domain.service.TareaService;
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import static com.bdb.gestortareasws.utilitarios.UtilidadesWeb.transformacionEstado;
+
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/tasks")
 public class TareaController {
-    /*@Autowired
-    private ProductService productService;*/
 
-    @GetMapping("/all")
-    @ApiOperation("Get al supermarket products")
-    @ApiResponse(code = 200, message = "OK")
-    public String getAll() {
-        return "Hola mundo";
+    @Autowired
+    private TareaService tareaService;
+
+    @Operation(description = "Método que permite la creación de una tarea", summary = "Crear Tarea")
+    @PreAuthorize("hasRole(ROLE_USER)")
+    @PostMapping
+    public ResponseEntity<RespuestaDTO> crearTarea(@RequestBody TareaDTO tareaDTO) {
+        return construirRespuesta(tareaService.crearTarea(tareaDTO));
     }
 
-    /*@GetMapping("/all")
-    @ApiOperation("Get al supermarket products")
-    @ApiResponse(code = 200, message = "OK")
-    public ResponseEntity<List<Product>> getAll() {
-        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
+    @Operation(description = "Método que permite obtener la lista de tareas creadas", summary = "Obtener Tarea")
+    @PreAuthorize("hasRole(ROLE_USER)")
+    @GetMapping
+    public ResponseEntity<RespuestaDTO> obtenerTareas() {
+        return construirRespuesta(tareaService.obtenerTareas());
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation("Search a product with an ID")
-    @ApiResponses(
-            {
-                    @ApiResponse(code = 200, message = "OK"),
-                    @ApiResponse(code = 404, message = "Product not found")
-            }
-    )
-    public ResponseEntity<Product> getProduct(@ApiParam(value = "The id of the product", required = true, example = "7") @PathVariable("id") int productId) {
-        return productService.getProduct(productId)
-                .map(product -> new ResponseEntity<>(product, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @Operation(description = "Método que permite actualizar una tarea a partir del id", summary = "Actualizar Tarea")
+    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    @PutMapping("/{id}")
+    public ResponseEntity<RespuestaDTO> actualizarTarea(@PathVariable Integer id, @RequestBody TareaDTO tareaDTO) {
+        return construirRespuesta(tareaService.actualizarTarea(id, tareaDTO));
     }
 
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId) {
-        return productService.getByCategory(categoryId)
-                .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
-                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    @Operation(description = "Método que permite eliminar una tarea a partir del id", summary = "Eliminar Tarea")
+    @PreAuthorize("hasRole(ROLE_ADMIN)")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RespuestaDTO> eliminarTarea(@PathVariable Integer id) {
+        return construirRespuesta(tareaService.eliminarTarea(id));
     }
 
-    @PostMapping("/save")
-    public ResponseEntity<Product> save(@RequestBody Product product) {
-        return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
+    private ResponseEntity<RespuestaDTO> construirRespuesta(RespuestaDTO respuesta) {
+        return new ResponseEntity<>(respuesta, transformacionEstado(respuesta));
     }
-
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") int productId) {
-        if (productService.delete(productId)) {
-            return new ResponseEntity(HttpStatus.OK);
-        } else {
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-    }*/
 }
