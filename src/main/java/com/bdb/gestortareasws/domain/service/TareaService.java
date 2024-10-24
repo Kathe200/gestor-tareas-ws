@@ -22,7 +22,7 @@ public class TareaService {
     @Autowired
     private TareaMapper tareaMapper;
 
-    public RespuestaDTO crearTarea(TareaDTO tareaDTO) {
+    public RespuestaDTO<TareaDTO> crearTarea(TareaDTO tareaDTO) {
 
         RespuestaDTO<TareaDTO> respuestaDTO = new RespuestaDTO<>();
 
@@ -51,7 +51,7 @@ public class TareaService {
         return respuestaDTO;
     }
 
-    public RespuestaDTO obtenerTareas() {
+    public RespuestaDTO<List<TareaDTO>> obtenerTareas() {
 
         RespuestaDTO<List<TareaDTO>> respuestaDTO = new RespuestaDTO<>();
 
@@ -80,7 +80,7 @@ public class TareaService {
         return respuestaDTO;
     }
 
-    public RespuestaDTO actualizarTarea(Integer id, TareaDTO tareaDTO) {
+    public RespuestaDTO<TareaDTO> actualizarTarea(Integer id, TareaDTO tareaDTO) {
 
         RespuestaDTO<TareaDTO> respuestaDTO = new RespuestaDTO<>();
 
