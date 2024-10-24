@@ -5,13 +5,6 @@ public class Constantes {
     private Constantes() {}
 
     /*
-     * Constantes de seguridad
-     */
-    public static final String ROLE_USER = "USER";
-    public static final String ROLE_ADMIN = "ADMIN";
-    public static final String TASKS_API = "/api/tasks/**";
-
-    /*
      * Codigos de respuestas
      */
     public static final String RES_CODIGO_EXITOSO = "0";
@@ -20,6 +13,9 @@ public class Constantes {
     public static final String RES_CODIGO_ERROR_DATOS_INCOMPLETOS = "3";
     public static final String RES_CODIGO_ERROR_NO_AUTORIZADO = "4";
 
+    /**
+     * Swagger
+     */
     public static final String DESC_RESPUESTA_CODIGO = "Codigo de respuesta del consumo: \n"
             +"\n"
             +"+ `0` - transacción exitosa. Status OK:200\n"
@@ -28,6 +24,13 @@ public class Constantes {
             +"+ `3` - transacción fallida, datos de entrada imcompletos o erroneos. BAD REQUEST:400\n"
             +"+ `4` - transacción fallida, no Autorizado: Token inválido. BAD REQUEST:401\n"
             +"\n";
+
+    public static final String RESP_404 = "{\n" + //
+            "    \"codigo\": \"2\",\n" + //
+            "    \"descripcion\": \"No exitoso: Error, no se encontro información\",\n" + //
+            "    \"esExitosa\": false,\n" + //
+            "    \"servidor\": \"bodmonto4\"\n" + //
+            "}";
 
     /*
      * Mensajes de respuesta
