@@ -1,6 +1,5 @@
 package com.bdb.gestortareasws.domain.dto;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "Tarea", description = "DTO del objeto Tarea")
+@Schema(description = "DTO del objeto Tarea")
 public class TareaDTO {
 
     @Schema(description = "Identificador de la tarea", example = "1")
