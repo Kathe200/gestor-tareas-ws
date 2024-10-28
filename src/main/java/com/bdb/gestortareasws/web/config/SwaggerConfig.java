@@ -1,30 +1,32 @@
 package com.bdb.gestortareasws.web.config;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 
-import springfox.documentation.builders.ExampleBuilder;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseBuilder;
-import springfox.documentation.schema.Example;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.service.Response;
-
-import static com.bdb.gestortareasws.utilitarios.Constantes.RESP_404;
 
 @Configuration
 public class SwaggerConfig {
+
     @Bean
+    public GroupedOpenApi publicApi() {
+        return GroupedOpenApi.builder()
+                .group("public")
+                .pathsToMatch("/api/**")
+                .build();
+    }
+
+    @Bean
+    public io.swagger.v3.oas.models.OpenAPI customOpenAPI() {
+        return new io.swagger.v3.oas.models.OpenAPI()
+                .info(new Info().title("Gestor de Tareas API")
+                        .version("1.0")
+                        .description("Documentación de la API para el gestor de tareas")
+                        .contact(new Contact().name("Tu Nombre").email("tuemail@ejemplo.com")));
+    }
+    /*@Bean
     public Docket api() {
 
         Example nf = new ExampleBuilder().description("404").id("404").value(RESP_404).mediaType(MediaType.ALL_VALUE).build();
@@ -58,6 +60,6 @@ public class SwaggerConfig {
                 "LICENSE URL",
                 Collections.emptyList()
         );
-    }
+    }*/
 }
 

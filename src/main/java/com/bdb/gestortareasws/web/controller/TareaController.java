@@ -3,8 +3,8 @@ package com.bdb.gestortareasws.web.controller;
 import com.bdb.gestortareasws.domain.dto.RespuestaDTO;
 import com.bdb.gestortareasws.domain.dto.TareaDTO;
 import com.bdb.gestortareasws.domain.service.TareaService;
-import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,7 @@ import static com.bdb.gestortareasws.utilitarios.UtilidadesWeb.transformacionEst
 
 @RestController
 @RequestMapping("/tasks")
-@Api(value = "Api gestor de tareas", produces = "Controlador gestor de tareas")
+@Tag(name = "Api gestor de tareas", description = "Controlador gestor de tareas")
 public class TareaController {
 
     @Autowired

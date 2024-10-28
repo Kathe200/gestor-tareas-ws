@@ -1,6 +1,5 @@
 package com.bdb.gestortareasws.domain.dto;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +10,7 @@ import static com.bdb.gestortareasws.utilitarios.Constantes.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value = "Respuesta", description = "DTO de la respuesta del consumo")
+@Schema(description = "DTO de la respuesta del consumo")
 public class RespuestaDTO<T> {
 
     @Schema(description = DESC_RESPUESTA_CODIGO, example = "0", allowableValues = {RES_CODIGO_EXITOSO, RES_CODIGO_ERROR_GENERICO, RES_CODIGO_ERROR_SIN_DATOS, RES_CODIGO_ERROR_DATOS_INCOMPLETOS})
